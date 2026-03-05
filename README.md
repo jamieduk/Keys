@@ -1,6 +1,6 @@
 # Keyboard Key Capture Tool
 
-(c) J~Net 2026
+(c) J~Net 2026 jnetai.com
 
 ---
 
