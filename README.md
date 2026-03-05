@@ -29,7 +29,7 @@ Unlike console-based solutions, this tool shows **everything on the page in a st
 
 ## Usage
 
-1. Open `key_capture.html` in a modern web browser.
+1. Open `keys.html` in a modern web browser.
 2. Press any key you want to test.
 3. Observe the **key information and counter** in the central status box.
 4. Use the captured `keyCode` or `code` values to map keys in your JavaScript projects.
