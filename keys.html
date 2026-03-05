@@ -1,0 +1,91 @@
+<!-- (c) J~Net 2026 jnetai.com -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Key Code Capture</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<style>
+body{
+background:#0f1117;
+color:#fff;
+font-family:sans-serif;
+margin:0;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+}
+
+h2{
+margin-bottom:20px;
+}
+
+#status{
+background:#1c1f26;
+border:1px solid #333;
+padding:25px;
+border-radius:6px;
+min-width:420px;
+text-align:center;
+font-size:18px;
+box-shadow:0 0 15px #00f0ff33;
+line-height:1.6;
+}
+
+.note{
+margin-top:15px;
+opacity:0.7;
+font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Keyboard Key Code Capture</h2>
+
+<div id="status">
+Press a key...
+</div>
+
+<div class="note">
+Press the same key twice to confirm the counter.
+</div>
+
+<script>
+// (c) J~Net 2026
+
+let keyPressCounts={};
+
+function setStatus(msg){
+document.getElementById("status").innerHTML=msg;
+}
+
+document.addEventListener("keydown",function(e){
+
+let key=e.key;
+let code=e.code;
+let keyCode=e.keyCode||e.which;
+let location=e.location;
+
+let id=keyCode;
+
+if(!keyPressCounts[id]) keyPressCounts[id]=0;
+keyPressCounts[id]++;
+
+setStatus(
+"keyCode: "+keyCode+
+"<br>key: "+key+
+"<br>code: "+code+
+"<br>location: "+location+
+"<br>count: "+keyPressCounts[id]
+);
+
+});
+</script>
+
+</body>
+</html>
