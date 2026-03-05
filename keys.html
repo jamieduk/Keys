@@ -47,14 +47,15 @@ font-size:14px;
 
 <body>
 
-<h2>Keyboard Key Code Capture</h2>
+<h2>Keyboard Key & Media Key Capture</h2>
 
 <div id="status">
 Press a key...
 </div>
 
 <div class="note">
-Press the same key twice to confirm the counter.
+Press the same key twice to confirm the counter.<br>
+Media keys like Play/Pause, Next, Previous should also show here if supported by your browser.
 </div>
 
 <script>
@@ -66,6 +67,7 @@ function setStatus(msg){
 document.getElementById("status").innerHTML=msg;
 }
 
+// Regular key capture
 document.addEventListener("keydown",function(e){
 
 let key=e.key;
@@ -73,7 +75,7 @@ let code=e.code;
 let keyCode=e.keyCode||e.which;
 let location=e.location;
 
-let id=keyCode;
+let id=keyCode+"|"+code;
 
 if(!keyPressCounts[id]) keyPressCounts[id]=0;
 keyPressCounts[id]++;
@@ -87,6 +89,54 @@ setStatus(
 );
 
 });
+
+// Media Session API detection for functional media keys
+if('mediaSession' in navigator){
+navigator.mediaSession.setActionHandler('play', function() {
+    let id='MediaPlayPause|play';
+    keyPressCounts[id]=(keyPressCounts[id]||0)+1;
+    setStatus(
+        "keyCode: N/A"+
+        "<br>key: MediaPlayPause"+
+        "<br>code: MediaPlayPause"+
+        "<br>location: N/A"+
+        "<br>count: "+keyPressCounts[id]
+    );
+});
+navigator.mediaSession.setActionHandler('pause', function() {
+    let id='MediaPlayPause|pause';
+    keyPressCounts[id]=(keyPressCounts[id]||0)+1;
+    setStatus(
+        "keyCode: N/A"+
+        "<br>key: MediaPlayPause"+
+        "<br>code: MediaPlayPause"+
+        "<br>location: N/A"+
+        "<br>count: "+keyPressCounts[id]
+    );
+});
+navigator.mediaSession.setActionHandler('previoustrack', function() {
+    let id='MediaTrackPrevious|prev';
+    keyPressCounts[id]=(keyPressCounts[id]||0)+1;
+    setStatus(
+        "keyCode: N/A"+
+        "<br>key: MediaTrackPrevious"+
+        "<br>code: MediaTrackPrevious"+
+        "<br>location: N/A"+
+        "<br>count: "+keyPressCounts[id]
+    );
+});
+navigator.mediaSession.setActionHandler('nexttrack', function() {
+    let id='MediaTrackNext|next';
+    keyPressCounts[id]=(keyPressCounts[id]||0)+1;
+    setStatus(
+        "keyCode: N/A"+
+        "<br>key: MediaTrackNext"+
+        "<br>code: MediaTrackNext"+
+        "<br>location: N/A"+
+        "<br>count: "+keyPressCounts[id]
+    );
+});
+}
 </script>
 
 </body>
